@@ -68,3 +68,55 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# 🚀 My Portfolio Website  
+
+A modern, animated portfolio built with **Next.js, React, TailwindCSS, and Framer Motion**, featuring a **3D chrome grid background** and **scroll-driven interactive containers** for smooth storytelling.  
+
+---
+
+## ✨ Features  
+- 🖼️ **Chrome Grid Background** – animated, responsive 3D grid backdrop  
+- 🎢 **Scroll Containers** – sections tilt, scale, and rotate as you scroll  
+- 📱 **Responsive Design** – mobile-friendly layout with dynamic scaling  
+- 🎨 **Dark Mode Styling** – elegant black and chrome-inspired theme  
+- ⚡ **Framer Motion Animations** – smooth transitions and perspective effects  
+
+---
+
+## 🛠️ Tech Stack  
+- **Framework:** [Next.js](https://nextjs.org/) (React 18, App Router)  
+- **Styling:** [TailwindCSS](https://tailwindcss.com/)  
+- **Animation:** [Framer Motion](https://www.framer.com/motion/)  
+- **3D/Visuals:** [Three.js](https://threejs.org/)  
+
+---
+
+## 📂 Project Structure  
+src/
+├── components/
+│ ├── ChromeGrid.js # Animated chrome-like grid background
+│ ├── ContainerScroll.js # Scroll-driven 3D card container
+│ └── ... other UI parts
+├── app/ # Next.js App Router (page.js, layout.js)
+├── styles/ # Tailwind + custom styles
+
+
+---
+
+## 🚀 Getting Started  
+
+1️⃣ Clone the repo  
+git clone https://github.com/HAWIBRYAN/my-portfolio.git
+cd my-portfolio
+
+2️⃣ Install dependencies
+npm install
+# or
+yarn install
+
+3️⃣ Run the development server
+npm run dev
+Open http://localhost:3000 to see your site.
+
+!!STILL A WORK IN PROGRESS
