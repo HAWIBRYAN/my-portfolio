@@ -93,17 +93,18 @@ A modern, animated portfolio built with **Next.js, React, TailwindCSS, and Frame
 ---
 
 📂 Project Structure
-
-src/
-├── components/
-│   ├── ChromeGrid.js        # Animated chrome-like grid background
-│   ├── ContainerScroll.js   # Scroll-driven 3D card container
-│   └── ... other UI parts
-├── app/                     # Next.js App Router (page.js, layout.js)
-├── styles/                  # Tailwind + custom styles
+.
+├── src/
+│   ├── components/
+│   │   ├── ChromeGrid.js        # Animated chrome-like grid background
+│   │   ├── ContainerScroll.js   # Scroll-driven 3D card container
+│   │   └── ... other UI parts
+│
+├── app/                         # Next.js App Router (page.js, layout.js)
+│
+├── styles/                      # Tailwind + custom styles 
 
 ---
-
 ## 🚀 Getting Started  
 
 1️⃣ Clone the repo  
