@@ -1,8 +1,8 @@
 'use client'
 
+import { Shape, ExtrudeGeometry } from 'react'
 import React, { useRef, useState, useMemo, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import * as THREE from 'three'
 
 // Box component
 const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, hoveredBox, rippleScale = 0.3, rippleRadius = 3 }) => {
@@ -10,7 +10,8 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
   const [currentScale, setCurrentScale] = useState(1)
 
   const geometry = useMemo(() => {
-    const shape = new THREE.Shape()
+    // eslint-disable-next-liine no-undef
+    const shape = new Shape()
     const halfWidth = width / 2
     const halfLength = length / 2
     const r = cornerRadius
@@ -28,8 +29,8 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
       bevelSegments: 10,
       curveSegments: 10
     }
-
-    const geom = new THREE.ExtrudeGeometry(shape, extrudeSettings)
+    // eslint-disable-nextline no undef
+    const geom = new ExtrudeGeometry(shape, extrudeSettings)
     geom.center()
     return geom
   }, [width, length, cornerRadius])
