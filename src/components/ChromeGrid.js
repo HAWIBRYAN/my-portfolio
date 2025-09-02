@@ -160,4 +160,3 @@ export function ChromeGrid() {
     </div>
   )
 }
-
