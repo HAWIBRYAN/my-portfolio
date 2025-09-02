@@ -10,7 +10,7 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
   const [currentScale, setCurrentScale] = useState(1)
 
   const geometry = useMemo(() => {
-    // eslint-disable-next-liine no-undef
+    
     const shape = new Shape()
     const halfWidth = width / 2
     const halfLength = length / 2
@@ -29,7 +29,7 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
       bevelSegments: 10,
       curveSegments: 10
     }
-    // eslint-disable-nextline no undef
+    
     const geom = new ExtrudeGeometry(shape, extrudeSettings)
     geom.center()
     return geom
