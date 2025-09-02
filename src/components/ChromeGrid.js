@@ -20,7 +20,15 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
     shape.absarc(-halfWidth + r, -halfLength + r, r, Math.PI, Math.PI * 1.5)
     shape.absarc(halfWidth - r, -halfLength + r, r, Math.PI * 1.5, Math.PI * 2)
 
-    const extrudeSettings = { depth: 0.3, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.05, bevelSegments: 10, curveSegments: 10 }
+    const extrudeSettings = {
+      depth: 0.3,
+      bevelEnabled: true,
+      bevelThickness: 0.05,
+      bevelSize: 0.05,
+      bevelSegments: 10,
+      curveSegments: 10
+    }
+
     const geom = new THREE.ExtrudeGeometry(shape, extrudeSettings)
     geom.center()
     return geom
@@ -38,7 +46,9 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
       const dx = gridPosition[0] - hoveredBox[0]
       const dz = gridPosition[1] - hoveredBox[1]
       const dist = Math.sqrt(dx * dx + dz * dz)
-      if (dist <= rippleRadius && dist > 0) targetScale = 1 + rippleScale * (1 - dist / rippleRadius)
+      if (dist <= rippleRadius && dist > 0) {
+        targetScale = 1 + rippleScale * (1 - dist / rippleRadius)
+      }
     }
 
     const lerp = 0.1
@@ -53,7 +63,13 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
 
   return (
     <mesh ref={meshRef} geometry={geometry} position={position} rotation={[Math.PI / 2, 0, 0]}>
-      <meshPhysicalMaterial color="#000000" roughness={0.5} metalness={1} clearcoat={1} clearcoatRoughness={0} />
+      <meshPhysicalMaterial
+        color="#000000"
+        roughness={0.5}
+        metalness={1}
+        clearcoat={1}
+        clearcoatRoughness={0}
+      />
     </mesh>
   )
 }
@@ -107,7 +123,15 @@ function GridOfBoxes() {
       const posX = (x - (gridSize - 1) / 2) * spacingX
       const posZ = (z - (gridSize - 1) / 2) * spacingZ
       boxes.push(
-        <Box key={`${x}-${z}`} position={[posX, -0.85, posZ]} width={boxWidth} length={boxLength} cornerRadius={0.8} gridPosition={[x, z]} hoveredBox={hoveredBox} />
+        <Box
+          key={`${x}-${z}`}
+          position={[posX, -0.85, posZ]}
+          width={boxWidth}
+          length={boxLength}
+          cornerRadius={0.8}
+          gridPosition={[x, z]}
+          hoveredBox={hoveredBox}
+        />
       )
     }
   }
@@ -136,3 +160,4 @@ export function ChromeGrid() {
     </div>
   )
 }
+
