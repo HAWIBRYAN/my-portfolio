@@ -1,8 +1,8 @@
 'use client'
 
-import { Shape, ExtrudeGeometry } from 'react'
 import React, { useRef, useState, useMemo, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Shape, ExtrudeGeometry } from 'three'
 
 // Box component
 const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, hoveredBox, rippleScale = 0.3, rippleRadius = 3 }) => {
