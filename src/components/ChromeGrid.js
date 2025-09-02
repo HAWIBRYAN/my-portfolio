@@ -5,12 +5,10 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Shape, ExtrudeGeometry } from 'three'
 
 // Box component
-const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, hoveredBox, rippleScale = 0.3, rippleRadius = 3 }) => {
-  const meshRef = useRef(null)
+const Box = React.forwardRef(({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, hoveredBox, rippleScale = 0.3, rippleRadius = 3 }, ref) => {
   const [currentScale, setCurrentScale] = useState(1)
 
   const geometry = useMemo(() => {
-    
     const shape = new Shape()
     const halfWidth = width / 2
     const halfLength = length / 2
@@ -21,15 +19,7 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
     shape.absarc(-halfWidth + r, -halfLength + r, r, Math.PI, Math.PI * 1.5)
     shape.absarc(halfWidth - r, -halfLength + r, r, Math.PI * 1.5, Math.PI * 2)
 
-    const extrudeSettings = {
-      depth: 0.3,
-      bevelEnabled: true,
-      bevelThickness: 0.05,
-      bevelSize: 0.05,
-      bevelSegments: 10,
-      curveSegments: 10
-    }
-    
+    const extrudeSettings = { depth: 0.3, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.05, bevelSegments: 10, curveSegments: 10 }
     const geom = new ExtrudeGeometry(shape, extrudeSettings)
     geom.center()
     return geom
@@ -38,7 +28,7 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
   useEffect(() => () => geometry.dispose(), [geometry])
 
   useFrame(() => {
-    if (!meshRef.current) return
+    if (!ref.current) return
     let targetScale = 1
 
     if (hoveredBox && gridPosition[0] === hoveredBox[0] && gridPosition[1] === hoveredBox[1]) {
@@ -47,37 +37,30 @@ const Box = ({ position, width = 4, length = 4, cornerRadius = 2, gridPosition, 
       const dx = gridPosition[0] - hoveredBox[0]
       const dz = gridPosition[1] - hoveredBox[1]
       const dist = Math.sqrt(dx * dx + dz * dz)
-      if (dist <= rippleRadius && dist > 0) {
-        targetScale = 1 + rippleScale * (1 - dist / rippleRadius)
-      }
+      if (dist <= rippleRadius && dist > 0) targetScale = 1 + rippleScale * (1 - dist / rippleRadius)
     }
 
     const lerp = 0.1
     const newScale = currentScale + (targetScale - currentScale) * lerp
     setCurrentScale(newScale)
-    meshRef.current.scale.z = newScale
+    ref.current.scale.z = newScale
   })
 
   useEffect(() => {
-    if (meshRef.current) meshRef.current.userData.gridPosition = gridPosition
+    if (ref.current) ref.current.userData.gridPosition = gridPosition
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gridPosition])
 
   return (
-    <mesh ref={meshRef} geometry={geometry} position={position} rotation={[Math.PI / 2, 0, 0]}>
-      <meshPhysicalMaterial
-        color="#000000"
-        roughness={0.5}
-        metalness={1}
-        clearcoat={1}
-        clearcoatRoughness={0}
-      />
+    <mesh ref={ref} geometry={geometry} position={position} rotation={[Math.PI / 2, 0, 0]}>
+      <meshPhysicalMaterial color="#000000" roughness={0.5} metalness={1} clearcoat={1} clearcoatRoughness={0} />
     </mesh>
   )
-}
+})
 
 // HoverDetector
-const HoverDetector = ({ onHoverChange }) => {
-  const { camera, raycaster, scene } = useThree()
+const HoverDetector = ({ boxes, onHoverChange }) => {
+  const { camera, raycaster } = useThree()
   const pointer = useRef([0, 0])
 
   useEffect(() => {
@@ -94,10 +77,12 @@ const HoverDetector = ({ onHoverChange }) => {
 
   useFrame(() => {
     raycaster.setFromCamera({ x: pointer.current[0], y: pointer.current[1] }, camera)
-    const intersects = raycaster.intersectObjects(scene.children, true)
-    for (const inter of intersects) {
-      if (inter.object.userData?.gridPosition) {
-        onHoverChange(inter.object.userData.gridPosition)
+    const intersects = raycaster.intersectObjects(boxes.current, true)
+
+    if (intersects.length > 0) {
+      const box = intersects[0].object
+      if (box.userData?.gridPosition) {
+        onHoverChange(box.userData.gridPosition)
         return
       }
     }
@@ -117,15 +102,19 @@ function GridOfBoxes() {
   const spacingZ = boxLength + gap
 
   const [hoveredBox, setHoveredBox] = useState(null)
-  const boxes = []
+  const boxes = useRef([])
 
+  const boxElements = []
   for (let x = 0; x < gridSize; x++) {
     for (let z = 0; z < gridSize; z++) {
       const posX = (x - (gridSize - 1) / 2) * spacingX
       const posZ = (z - (gridSize - 1) / 2) * spacingZ
-      boxes.push(
+      const ref = React.createRef()
+      boxes.current.push(ref)
+      boxElements.push(
         <Box
           key={`${x}-${z}`}
+          ref={ref}
           position={[posX, -0.85, posZ]}
           width={boxWidth}
           length={boxLength}
@@ -139,8 +128,8 @@ function GridOfBoxes() {
 
   return (
     <>
-      <HoverDetector onHoverChange={setHoveredBox} />
-      {boxes}
+      <HoverDetector boxes={boxes} onHoverChange={setHoveredBox} />
+      {boxElements}
     </>
   )
 }
