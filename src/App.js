@@ -32,22 +32,37 @@ export default function App() {
     loadBotpress()
   }, [])
 
-  return (
-    <div className="h-screen w-screen text-white overflow-x-hidden">
+ return (
+    <div className="relative min-h-screen w-full text-white overflow-x-hidden">
+      {/* Background grid (always mounted) */}
       <ChromeGrid />
 
-      {/* Sections */}
-      <ContainerScroll titleComponent={<h2 className="text-4xl font-bold">About Me</h2>}>
-        <About />
-      </ContainerScroll>
+      {/* Foreground content */}
+      <main className="relative z-10">
+        <ContainerScroll
+          titleComponent={<h1 className="text-4xl font-bold text-white">Welcome</h1>}
+        >
+          <p className="text-lg text-gray-200">
+            About
+          </p>
+        </ContainerScroll>
 
-      <ContainerScroll titleComponent={<h2 className="text-4xl font-bold">Projects</h2>}>
-        <p className="mt-4 text-lg">Here are some of my projects...</p>
-      </ContainerScroll>
+        <ContainerScroll
+          titleComponent={<h1 className="text-4xl font-bold text-white">Projects</h1>}
+        >
+          <p className="text-lg text-gray-200">
+            Here are some of my projects...
+          </p>
+        </ContainerScroll>
 
-      <ContainerScroll titleComponent={<h2 className="text-4xl font-bold">Contact</h2>}>
-        <p className="mt-4 text-lg">You can contact me at: hawibryan04@gmail.com</p>
-      </ContainerScroll>
+        <ContainerScroll
+          titleComponent={<h1 className="text-4xl font-bold text-white">Contacts</h1>}
+        >
+          <p className="text-lg text-gray-200">
+            You can contact me at: hawibryan04@gmail.com
+          </p>
+        </ContainerScroll>
+      </main>
     </div>
   )
 }
