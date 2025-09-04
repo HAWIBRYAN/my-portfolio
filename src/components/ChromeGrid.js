@@ -96,17 +96,33 @@ const Box = ({
 
 // HoverDetector
 function HoverDetector({ onHoverChange }) {
-  const { camera, raycaster, pointer, scene } = useThree()
+  const { camera, raycaster, scene, gl } = useThree()
+  const mouse = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      const rect = gl.domElement.getBoundingClientRect()
+      mouse.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [gl])
 
   useFrame(() => {
-    raycaster.setFromCamera(pointer, camera)
+    raycaster.setFromCamera(mouse.current, camera)
     const intersects = raycaster.intersectObjects(scene.children, true)
 
-    const hit = intersects.find((i) => i.object.userData?.gridPosition)
-    if (hit) {
-      onHoverChange(hit.object.userData.gridPosition)
-      return
+    if (intersects.length > 0) {
+      for (const intersect of intersects) {
+        if (intersect.object.userData?.gridPosition) {
+          onHoverChange(intersect.object.userData.gridPosition)
+          return
+        }
+      }
     }
+
     onHoverChange(null)
   })
 
@@ -159,8 +175,8 @@ export function ChromeGrid() {
   return (
     <div className="h-full w-full fixed inset-0 z-0">
       <Canvas
-        camera={{ position: [-9.31, 12, 24.72], fov: 35 }}
-        className="pointer-events-auto" // ✅ allow hover
+        camera={{ position: [-9.31, 12, 24.72], rotation: [-0.65, 0.2, 0.13], fov: 35 }}
+        className="pointer-events-auto"
       >
         <color attach="background" args={['#000']} />
         <ambientLight intensity={1} />
