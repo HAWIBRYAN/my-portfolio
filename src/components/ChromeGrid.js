@@ -1,55 +1,43 @@
 'use client'
 
-import React, { useRef, useState, useMemo, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { ExtrudeGeometry, Shape } from 'three'
 
+// 🔹 Precompute geometry once and reuse for all boxes
+const createBoxGeometry = () => {
+  const shape = new Shape()
+  const r = 0.8
+  const w = 4
+  const h = 4
+  const step = Math.PI * 0.5
+
+  shape.absarc(w / 2 - r, h / 2 - r, r, step * 0, step * 1)
+  shape.absarc(-w / 2 + r, h / 2 - r, r, step * 1, step * 2)
+  shape.absarc(-w / 2 + r, -h / 2 + r, r, step * 2, step * 3)
+  shape.absarc(w / 2 - r, -h / 2 + r, r, step * 3, step * 4)
+
+  return new ExtrudeGeometry(shape, {
+    depth: 0.3,
+    bevelEnabled: true,
+    bevelThickness: 0.05,
+    bevelSize: 0.05,
+    bevelSegments: 6,   // reduced from 20 → faster
+    curveSegments: 6    // reduced from 20 → faster
+  }).center()
+}
+
+const boxGeometry = createBoxGeometry()
+
 // Box component
-const Box = ({
-  position,
-  width = 4,
-  length = 4,
-  cornerRadius = 2,
-  gridPosition,
-  hoveredBox,
-  rippleScale = 0.3,
-  rippleRadius = 3,
-}) => {
+const Box = ({ position, gridPosition, hoveredBox, rippleScale = 0.3, rippleRadius = 3 }) => {
   const meshRef = useRef(null)
   const [currentScale, setCurrentScale] = useState(1)
-
-  const geometry = useMemo(() => {
-    const shape = new Shape()
-    const angleStep = Math.PI * 0.5
-    const radius = cornerRadius
-
-    const halfWidth = width / 2
-    const halfLength = length / 2
-
-    shape.absarc(halfWidth - radius, halfLength - radius, radius, angleStep * 0, angleStep * 1)
-    shape.absarc(-halfWidth + radius, halfLength - radius, radius, angleStep * 1, angleStep * 2)
-    shape.absarc(-halfWidth + radius, -halfLength + radius, radius, angleStep * 2, angleStep * 3)
-    shape.absarc(halfWidth - radius, -halfLength + radius, radius, angleStep * 3, angleStep * 4)
-
-    const extrudeSettings = {
-      depth: 0.3,
-      bevelEnabled: true,
-      bevelThickness: 0.05,
-      bevelSize: 0.05,
-      bevelSegments: 20,
-      curveSegments: 20,
-    }
-
-    const geometry = new ExtrudeGeometry(shape, extrudeSettings)
-    geometry.center()
-    return geometry
-  }, [width, length, cornerRadius])
-
-  useEffect(() => () => geometry.dispose(), [geometry])
 
   useFrame(() => {
     if (meshRef.current) {
       let targetScale = 1
+
       const isThisBoxHovered =
         hoveredBox && gridPosition[0] === hoveredBox[0] && gridPosition[1] === hoveredBox[1]
 
@@ -82,7 +70,7 @@ const Box = ({
   }, [gridPosition])
 
   return (
-    <mesh ref={meshRef} geometry={geometry} position={position} rotation={[Math.PI / 2, 0, 0]}>
+    <mesh ref={meshRef} geometry={boxGeometry} position={position} rotation={[Math.PI / 2, 0, 0]}>
       <meshPhysicalMaterial
         color="#232323"
         roughness={0.5}
@@ -96,7 +84,7 @@ const Box = ({
 
 // HoverDetector
 function HoverDetector({ onHoverChange }) {
-  const { camera, raycaster, scene, gl } = useThree()
+  const { camera, raycaster, gl, scene } = useThree()
   const mouse = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
@@ -114,12 +102,10 @@ function HoverDetector({ onHoverChange }) {
     raycaster.setFromCamera(mouse.current, camera)
     const intersects = raycaster.intersectObjects(scene.children, true)
 
-    if (intersects.length > 0) {
-      for (const intersect of intersects) {
-        if (intersect.object.userData?.gridPosition) {
-          onHoverChange(intersect.object.userData.gridPosition)
-          return
-        }
+    for (const intersect of intersects) {
+      if (intersect.object.userData?.gridPosition) {
+        onHoverChange(intersect.object.userData.gridPosition)
+        return
       }
     }
 
@@ -150,9 +136,6 @@ function GridOfBoxes() {
         <Box
           key={`${x}-${z}`}
           position={[posX, -0.85, posZ]}
-          width={boxWidth}
-          length={boxLength}
-          cornerRadius={0.8}
           gridPosition={[x, z]}
           hoveredBox={hoveredBox}
           rippleScale={2.5}
@@ -171,11 +154,11 @@ function GridOfBoxes() {
 }
 
 // ChromeGrid
-export function ChromeGrid() {
+export default function ChromeGrid() {
   return (
     <div className="h-full w-full fixed inset-0 z-0">
       <Canvas
-        camera={{ position: [-9.31, 12, 24.72], rotation: [-0.65, 0.2, 0.13], fov: 35 }}
+        camera={{ position: [-9.31, 12, 24.72], fov: 35 }}
         className="pointer-events-auto"
       >
         <color attach="background" args={['#000']} />
