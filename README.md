@@ -98,9 +98,7 @@ git clone https://github.com/HAWIBRYAN/my-portfolio.git
 cd my-portfolio
 
 2️⃣ Install dependencies
-npm install
-# or
-yarn install
+npm install or yarn install
 
 3️⃣ Run the development server
 npm run dev
