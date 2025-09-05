@@ -91,20 +91,6 @@ A modern, animated portfolio built with **Next.js, React, TailwindCSS, and Frame
 - **3D/Visuals:** [Three.js](https://threejs.org/)  
 
 ---
-
-📂 Project Structure
-.
-├── src/
-│   ├── components/
-│   │   ├── ChromeGrid.js        # Animated chrome-like grid background
-│   │   ├── ContainerScroll.js   # Scroll-driven 3D card container
-│   │   └── ... other UI parts
-│
-├── app/                         # Next.js App Router (page.js, layout.js)
-│
-├── styles/                      # Tailwind + custom styles 
-
----
 ## 🚀 Getting Started  
 
 1️⃣ Clone the repo  
@@ -118,6 +104,7 @@ yarn install
 
 3️⃣ Run the development server
 npm run dev
-Open http://localhost:3000 to see your site.
+Open http://localhost:3000 to see the site.
+customize as needed
 
-!!STILL A WORK IN PROGRESS
+!!STILL A WORK IN PROGRESS!!
