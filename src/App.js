@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { ContainerScroll } from './components/ContainerScroll'
 import ChromeGrid from './components/ChromeGrid'
 
-
 export default function App() {
   useEffect(() => {
-    // Inject Botpress scripts dynamically
+    // Inject Botpress scripts dynamically (default bubble)
     const injectScript = (src) => {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script")
@@ -19,7 +18,6 @@ export default function App() {
 
     async function loadBotpress() {
       try {
-        // Load in order
         await injectScript("https://cdn.botpress.cloud/webchat/v3.2/inject.js")
         await injectScript("https://files.bpcontent.cloud/2025/09/02/05/20250902054200-KML4YW93.js")
       } catch (err) {
@@ -56,22 +54,18 @@ export default function App() {
       </ContainerScroll>
 
       {/* About Me */}
-      <ContainerScroll
-        titleComponent={<h2 className="text-4xl font-bold">About Me</h2>}
-      >
+      <ContainerScroll titleComponent={<h2 className="text-4xl font-bold">About Me</h2>}>
         <div className="space-y-2 text-left">
           <p><span className="font-bold">Name:</span> Hawi Bryan</p>
           <p><span className="font-bold">Education:</span> BSc. Information Technology, JKUAT</p>
           <p><span className="font-bold">Certifications:</span> Cybersecurity Certificate</p>
           <p><span className="font-bold">Skills:</span> React, Flutter, Django, Node.js, MySQL, APIs</p>
-          <p className="italic text-gray-300">“Tech excites me because it bridges ideas with real impact.”</p>
+          <p className="italic text-gray-300">“(-_-)”</p>
         </div>
       </ContainerScroll>
 
       {/* Projects */}
-      <ContainerScroll
-        titleComponent={<h2 className="text-4xl font-bold">🚀 Projects</h2>}
-      >
+      <ContainerScroll titleComponent={<h2 className="text-4xl font-bold">🚀 Projects</h2>}>
         <div className="grid md:grid-cols-2 gap-6">
           {/* My Portfolio */}
           <div className="p-4 border border-gray-600 rounded-lg bg-[#1c1c1c] hover:scale-105 transition-transform">
@@ -81,20 +75,8 @@ export default function App() {
               Features a futuristic ChromeGrid background and smooth scroll containers.
             </p>
             <div className="mt-3 space-x-3">
-              <a
-                href="https://github.com/HAWIBRYAN/my-portfolio"
-                className="text-blue-400"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-              <button
-                className="text-blue-400 underline"
-                onClick={() => alert("Live demo coming soon! 🚀")}
-              >
-                Live Demo
-              </button>
+              <a href="https://github.com/HAWIBRYAN/my-portfolio" className="text-blue-400">GitHub</a>
+              <a href="#" className="text-blue-400">Live Demo</a>
             </div>
           </div>
 
@@ -106,14 +88,7 @@ export default function App() {
               Built with modern web technologies to support scalable messaging campaigns.
             </p>
             <div className="mt-3 space-x-3">
-              <a
-                href="https://github.com/HAWIBRYAN/TaifaMobileBulkSMS"
-                className="text-blue-400"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+              <a href="https://github.com/HAWIBRYAN/TaifaMobileBulkSMS" className="text-blue-400">GitHub</a>
             </div>
           </div>
 
@@ -125,14 +100,7 @@ export default function App() {
               Features inventory management, accounting, and user roles.
             </p>
             <div className="mt-3 space-x-3">
-              <a
-                href="https://github.com/HAWIBRYAN/LaravelERP"
-                className="text-blue-400"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+              <a href="https://github.com/HAWIBRYAN/LaravelERP" className="text-blue-400">GitHub</a>
             </div>
           </div>
 
@@ -144,27 +112,17 @@ export default function App() {
               Focuses on simplicity and productivity.
             </p>
             <div className="mt-3 space-x-3">
-              <a
-                href="https://github.com/HAWIBRYAN/SimpleTaskManager"
-                className="text-blue-400"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+              <a href="https://github.com/HAWIBRYAN/SimpleTaskManager" className="text-blue-400">GitHub</a>
             </div>
           </div>
         </div>
       </ContainerScroll>
 
       {/* Experience */}
-      <ContainerScroll
-        titleComponent={<h2 className="text-4xl font-bold">Experience</h2>}
-      >
+      <ContainerScroll titleComponent={<h2 className="text-4xl font-bold">Experience</h2>}>
         <div className="space-y-4 text-left">
           <p>
-            <span className="font-bold">Internships:</span> Centrino Technologies intern – Designed and built databases in SQL, ensuring efficient data storage, retrieval,
-            and integrity.
+            <span className="font-bold">Internships:</span> Centrino Technologies intern – Designed and built databases in SQL, ensuring efficient data storage, retrieval, and integrity.
           </p>
           <p>
             <span className="font-bold">Leadership:</span> Led team projects at JKUAT, 
@@ -174,9 +132,7 @@ export default function App() {
       </ContainerScroll>
 
       {/* Contact */}
-      <ContainerScroll
-        titleComponent={<h2 className="text-4xl font-bold">Contact Me</h2>}
-      >
+      <ContainerScroll titleComponent={<h2 className="text-4xl font-bold">Contact Me</h2>}>
         <div className="text-center space-y-3">
           <p>Email: <a href="mailto:hawibryan04@gmail.com" className="text-blue-400">hawibryan04@gmail.com</a></p>
           <p>
