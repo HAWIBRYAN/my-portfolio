@@ -69,40 +69,98 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# 🚀 My Portfolio Website  
+# My Portfolio 🚀
 
-A modern, animated portfolio built with **Next.js, React, TailwindCSS, and Framer Motion**, featuring a **3D chrome grid background** and **scroll-driven interactive containers** for smooth storytelling.  
-
----
-
-## ✨ Features  
-- 🖼️ **Chrome Grid Background** – animated, responsive 3D grid backdrop  
-- 🎢 **Scroll Containers** – sections tilt, scale, and rotate as you scroll  
-- 📱 **Responsive Design** – mobile-friendly layout with dynamic scaling  
-- 🎨 **Dark Mode Styling** – elegant black and chrome-inspired theme  
-- ⚡ **Framer Motion Animations** – smooth transitions and perspective effects  
+An interactive personal portfolio built with **React, TailwindCSS, Framer Motion, and Three.js**.  
+It features a **futuristic ChromeGrid background**, smooth **scroll-based containers**, and an integrated **AI Chatbot** powered by **Botpress**.  
 
 ---
 
-## 🛠️ Tech Stack  
-- **Framework:** [Next.js](https://nextjs.org/) (React 18, App Router)  
-- **Styling:** [TailwindCSS](https://tailwindcss.com/)  
-- **Animation:** [Framer Motion](https://www.framer.com/motion/)  
-- **3D/Visuals:** [Three.js](https://threejs.org/)  
+## ✨ Features
+
+- 🎨 **ChromeGrid Background** – Interactive 3D grid of boxes built with Three.js.  
+- 📜 **ContainerScroll Layout** – Scroll-driven animations with depth & perspective.  
+- 🤖 **AI Chatbot Integration** – Botpress-powered assistant available on all pages.  
+- 📱 **Mobile-First & Responsive** – Optimized for both smartphones and desktop.  
+- ⚡ **Performance Optimized** – Lazy loading sections + instanced mesh rendering.  
 
 ---
-## 🚀 Getting Started  
 
-1️⃣ Clone the repo  
-git clone https://github.com/HAWIBRYAN/my-portfolio.git
-cd my-portfolio
+## 🧩 Components Breakdown
 
-2️⃣ Install dependencies
-npm install or yarn install
+### 1. **ChromeGrid**  
+📌 Source/Reference: [21st.dev – ChromeGrid](https://21st.dev/community/components/66hex/chrome-grid/default)  
 
-3️⃣ Run the development server
-npm run dev
-Open http://localhost:3000 to see the site.
-customize as needed
+- Implemented with **Three.js** + **React Three Fiber**.  
+- Displays a grid of extruded 3D boxes with hover interaction (ripple effect).  
+- Optimized with **`InstancedMesh`** for performance.  
+- Runs as a **fixed background layer** (`inset-0 z-0`) so other content scrolls above it.  
+- Customization: lighting, hover scale, ripple radius, and color scheme.  
 
-!!STILL A WORK IN PROGRESS!!
+🔧 **Usage in Project:**  
+- Serves as the **universal animated background** for the site.  
+- Creates a futuristic aesthetic for all sections.  
+
+---
+
+### 2. **ContainerScroll**  
+📌 Source/Reference: [21st.dev – Container Scroll Animation](https://21st.dev/community/components/aceternity/container-scroll-animation/default)  
+
+- Built with **Framer Motion**’s `useScroll` and `useTransform`.  
+- Adds **parallax-like animations** as you scroll:  
+  - Cards tilt (`rotateX`)  
+  - Smooth scaling (`scale`)  
+  - Vertical translation (`translateY`)  
+- Provides each **section container** with depth & cinematic transitions.  
+
+🔧 **Usage in Project:**  
+- Wraps every portfolio section (Hero, About, Projects, Experience, Contact).  
+- Ensures consistent scroll-based animations across the entire site.  
+
+---
+
+### 3. **Hero Section**  
+- A **scrollable container** introducing you:  
+  - 👋 Greeting headline  
+  - Summary of role (Full-Stack Developer)  
+  - Downloadable Resume button  
+
+---
+
+### 4. **About Me Section**  
+- Faux-resume style presentation:  
+  - Name, education, certifications, and skills  
+  - Inspirational quote in italics  
+
+---
+
+### 5. **Projects Section**  
+- Showcases 4 main repos:  
+  - `my-portfolio`  
+  - `TaifaMobileBulkSMS`  
+  - `LaravelERP`  
+  - `SimpleTaskManager`  
+- Each project is displayed in a **card layout** with hover animations.  
+
+---
+
+### 6. **Experience Section**  
+- Highlights **internships** and **leadership roles**.  
+
+---
+
+### 7. **Contact Section**  
+- Provides key contact info:  
+  - Email  
+  - GitHub  
+  - LinkedIn  
+- Works alongside the chatbot for multiple ways to reach you.  
+
+---
+
+### 8. **AI Chatbot (Botpress)**  
+- Integrated via **Botpress Cloud Webchat v3.2**.  
+- Injected dynamically with:  
+  ```js
+  await injectScript("https://cdn.botpress.cloud/webchat/v3.2/inject.js")
+  await injectScript("https://files.bpcontent.cloud/<your-bot-id>.js")
