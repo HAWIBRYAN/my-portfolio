@@ -164,3 +164,78 @@ It features a **futuristic ChromeGrid background**, smooth **scroll-based contai
   ```js
   await injectScript("https://cdn.botpress.cloud/webchat/v3.2/inject.js")
   await injectScript("https://files.bpcontent.cloud/<your-bot-id>.js")
+- Provides:
+
+- Project navigation help
+
+- Contact info delivery
+
+- General portfolio Q&A
+
+- Loads after main site for better performance.
+
+- Cached aggressively by browsers to reduce repeat load time.
+
+### 9.⚡ Performance Optimizations
+
+- This project is designed to run smoothly across desktop and mobile devices.
+
+- InstancedMesh for ChromeGrid
+
+- Instead of rendering 100+ separate meshes, the grid is drawn using one InstancedMesh.
+
+- Reduces GPU draw calls from hundreds → one, greatly improving performance.
+
+- Lazy Loading Sections
+
+- Sections (About, Projects, Experience, Contact) load only when scrolled into view.
+
+- Keeps initial page load fast, especially on mobile.
+
+- Dynamic Chatbot Loading
+
+- The Botpress chatbot script is injected dynamically after the site loads.
+
+- Ensures your portfolio UI is interactive immediately, with the chatbot initializing in the background.
+
+- Responsive Scaling
+
+- ContainerScroll adjusts scale based on device width (0.7 → 0.9 for mobile).
+
+- Prevents heavy animations from overwhelming smaller devices.
+
+- Browser Caching
+
+- Botpress scripts + assets are cached by the browser for faster repeat visits.
+
+### 🖥️ Tech Stack
+
+- Frontend: React, TailwindCSS, Framer Motion
+
+- 3D Graphics: Three.js, React Three Fiber
+
+- AI Chatbot: Botpress Cloud
+
+- Deployment: Netlify
+
+### 🚀 Running Locally
+git clone https://github.com/HAWIBRYAN/my-portfolio.git
+cd my-portfolio
+npm install
+npm start
+
+### 📱 Mobile Compatibility
+
+- Fully responsive design using TailwindCSS.
+
+- ContainerScroll animations optimized for smaller screens.
+
+- ChromeGrid renders smoothly even on mobile thanks to instancing.
+
+- Chatbot automatically adapts into a mobile-friendly chat panel.
+
+### 📬 Contact
+
+Email: hawibryan04@gmail.com
+Discord : hawi0445
+GitHub: HAWIBRYAN
