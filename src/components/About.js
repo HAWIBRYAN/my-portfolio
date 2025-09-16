@@ -1,75 +1,35 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 
-const About = () => {
+export default function AboutSection() {
+  const skills = ["React", "Three.js", "WebGL", "Node.js"];
+
   return (
-    <div className="h-full w-full bg-zinc-900 text-gray-100 font-sans rounded-xl overflow-y-auto p-6 md:p-10">
-      {/* Header */}
-      <div className="text-center border-b border-gray-700 pb-4 mb-6">
-        <h1 className="text-3xl md:text-4xl font-bold">Hawi Bryan</h1>
-        <p className="text-sm md:text-base text-gray-400">
-          Software Developer • UI/UX Enthusiast • Problem Solver
-        </p>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="glass-card glow-border rounded-2xl p-8 max-w-4xl mx-auto text-center"
+    >
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+
+      </h1>
+      <p className="text-lg md:text-xl leading-relaxed mb-8">
+        I'm a visionary developer with a passion for creating immersive digital
+        experiences. My expertise spans across cutting-edge technologies in web
+        development, 3D graphics, and interactive design.
+      </p>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {skills.map((skill, i) => (
+          <div
+            key={i}
+            className="bg-[#1c1c1c] rounded-lg p-3 text-center border border-[#333] hover:border-[#00d1ff] transition-colors"
+          >
+            <span className="text-[#00d1ff] font-medium">{skill}</span>
+          </div>
+        ))}
       </div>
-
-      {/* Summary */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-300 mb-2">Summary</h2>
-        <p className="text-sm leading-relaxed">
-          Passionate full-stack developer with experience building modern web
-          applications. Skilled in React, Next.js, Node.js, and database
-          management, with an eye for intuitive design and smooth user
-          experience.
-        </p>
-      </section>
-
-      {/* Experience */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-300 mb-2">Experience</h2>
-        <div className="space-y-3">
-          <div>
-            <p className="font-medium">Frontend Developer – Freelance</p>
-            <p className="text-xs text-gray-400">2023 – Present</p>
-            <p className="text-sm">
-              Designed and developed interactive UI components for client
-              projects using React, Tailwind, and Framer Motion.
-            </p>
-          </div>
-          <div>
-            <p className="font-medium">IT Intern – Centrino Technologies</p>
-            <p className="text-xs text-gray-400">2022 – 2023</p>
-            <p className="text-sm">
-              Assisted in building internal tools, optimized database queries,
-              and supported deployment pipelines.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-300 mb-2">Skills</h2>
-        <ul className="grid grid-cols-2 gap-2 text-sm">
-          <li>React / Next.js</li>
-          <li>Node.js / Express</li>
-          <li>TailwindCSS</li>
-          <li>Framer Motion</li>
-          <li>MySQL / PostgreSQL</li>
-          <li>REST / APIs</li>
-        </ul>
-      </section>
-
-      {/* Education */}
-      <section>
-        <h2 className="text-lg font-semibold text-gray-300 mb-2">Education</h2>
-        <p className="font-medium">BSc. in Information Technology</p>
-        <p className="text-xs text-gray-400">
-          Jomo Kenyatta University of Agriculture and Technology (JKUAT)
-        </p>
-        <p className="text-sm">2019 – 2025 (expected)</p>
-      </section>
-    </div>
+    </motion.div>
   );
-};
-
-export default About;
+}

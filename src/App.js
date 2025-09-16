@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { ContainerScroll } from './components/ContainerScroll'
-import ChromeGrid from './components/ChromeGrid'
+import { ContainerScroll } from "./components/ContainerScroll";
+import ChromeGrid from "./components/ChromeGrid";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Contacts from "./components/Contacts";
 
 export default function App() {
   useEffect(() => {
-    // Inject Botpress scripts dynamically
     const injectScript = (src) => {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
@@ -35,7 +37,7 @@ export default function App() {
       {/* Background grid */}
       <ChromeGrid />
 
-      {/* Intro / Hero */}
+      {/* Hero */}
       <ContainerScroll
         titleComponent={
           <h2 className="text-3xl md:text-5xl font-bold text-center">
@@ -60,7 +62,7 @@ export default function App() {
         </div>
       </ContainerScroll>
 
-      {/* About Me */}
+      {/* About */}
       <ContainerScroll
         titleComponent={
           <h2 className="text-3xl md:text-5xl font-bold text-center">
@@ -68,26 +70,7 @@ export default function App() {
           </h2>
         }
       >
-        <div className="space-y-2 text-left px-4 max-w-lg mx-auto text-sm md:text-base">
-          <p>
-            <span className="font-bold">Name:</span> Hawi Bryan
-          </p>
-          <p>
-            <span className="font-bold">Education:</span> BSc. Information
-            Technology, JKUAT
-          </p>
-          <p>
-            <span className="font-bold">Certifications:</span> Cybersecurity
-            Certificate
-          </p>
-          <p>
-            <span className="font-bold">Skills:</span> React, Flutter, Django,
-            Node.js, MySQL, APIs
-          </p>
-          <p className="italic text-gray-300">
-            “Tech excites me because it bridges ideas with real impact.”
-          </p>
-        </div>
+        <About />
       </ContainerScroll>
 
       {/* Projects */}
@@ -98,83 +81,7 @@ export default function App() {
           </h2>
         }
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-          {/* My Portfolio */}
-          <div className="p-4 md:p-6 border border-gray-600 rounded-lg bg-[#1c1c1c] hover:scale-105 transition-transform">
-            <h3 className="font-bold text-lg md:text-xl">My Portfolio</h3>
-            <p className="text-sm md:text-base mt-2">
-              An interactive personal portfolio built with React, Three.js, and
-              Tailwind. Features a futuristic ChromeGrid background and smooth
-              scroll containers.
-            </p>
-            <div className="mt-3 space-x-3">
-              <a
-                href="https://github.com/HAWIBRYAN/my-portfolio"
-                className="text-blue-400 text-sm md:text-base"
-              >
-                GitHub
-              </a>
-              <a href="#" className="text-blue-400 text-sm md:text-base">
-                Live Demo
-              </a>
-            </div>
-          </div>
-
-          {/* Taifa Mobile Bulk SMS */}
-          <div className="p-4 md:p-6 border border-gray-600 rounded-lg bg-[#1c1c1c] hover:scale-105 transition-transform">
-            <h3 className="font-bold text-lg md:text-xl">
-              Taifa Mobile Bulk SMS
-            </h3>
-            <p className="text-sm md:text-base mt-2">
-              A bulk SMS platform for sending marketing and transactional
-              messages. Built with modern web technologies to support scalable
-              messaging campaigns.
-            </p>
-            <div className="mt-3">
-              <a
-                href="https://github.com/HAWIBRYAN/TaifaMobileBulkSMS"
-                className="text-blue-400 text-sm md:text-base"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-
-          {/* Laravel ERP */}
-          <div className="p-4 md:p-6 border border-gray-600 rounded-lg bg-[#1c1c1c] hover:scale-105 transition-transform">
-            <h3 className="font-bold text-lg md:text-xl">Laravel ERP</h3>
-            <p className="text-sm md:text-base mt-2">
-              A lightweight ERP system built with Laravel, designed for small
-              businesses. Features inventory management, accounting, and user
-              roles.
-            </p>
-            <div className="mt-3">
-              <a
-                href="https://github.com/HAWIBRYAN/LaravelERP"
-                className="text-blue-400 text-sm md:text-base"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-
-          {/* Simple Task Manager */}
-          <div className="p-4 md:p-6 border border-gray-600 rounded-lg bg-[#1c1c1c] hover:scale-105 transition-transform">
-            <h3 className="font-bold text-lg md:text-xl">Simple Task Manager</h3>
-            <p className="text-sm md:text-base mt-2">
-              A simple yet effective task manager for tracking daily to-dos and
-              projects. Focuses on simplicity and productivity.
-            </p>
-            <div className="mt-3">
-              <a
-                href="https://github.com/HAWIBRYAN/SimpleTaskManager"
-                className="text-blue-400 text-sm md:text-base"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
+        <Projects />
       </ContainerScroll>
 
       {/* Experience */}
@@ -199,7 +106,7 @@ export default function App() {
         </div>
       </ContainerScroll>
 
-      {/* Contact */}
+      {/* Contacts */}
       <ContainerScroll
         titleComponent={
           <h2 className="text-3xl md:text-5xl font-bold text-center">
@@ -207,26 +114,7 @@ export default function App() {
           </h2>
         }
       >
-        <div className="text-center space-y-3 px-4 text-sm md:text-base">
-          <p>
-            Email:{" "}
-            <a
-              href="mailto:hawibryan04@gmail.com"
-              className="text-blue-400 break-all"
-            >
-              hawibryan04@gmail.com
-            </a>
-          </p>
-          <p>
-            GitHub:{" "}
-            <a
-              href="https://github.com/HAWIBRYAN"
-              className="text-blue-400 break-all"
-            >
-              github.com/HAWIBRYAN
-            </a>
-          </p>
-        </div>
+        <Contacts />
       </ContainerScroll>
     </div>
   );
